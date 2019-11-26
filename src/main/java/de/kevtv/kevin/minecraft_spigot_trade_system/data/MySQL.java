@@ -27,16 +27,7 @@ public class MySQL {
      * Setze alle Datenbank Tabellen auf
      */
     public static void setupMySQLTables() {
-        setupMySQLinventoryStatsTable();
         setupMySQLmoneyTable();
-        setupMySQLrequestUserTable();
-    }
-
-    /**
-     * Setze den requestUserTable auf
-     */
-    private static void setupMySQLrequestUserTable() {
-        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("requestUserTable") + "(sender_uuid varchar(255) NOT NULL, receiver_uuid varchar(255) NOT NULL)");
     }
 
     /**
@@ -44,13 +35,6 @@ public class MySQL {
      */
     private static void setupMySQLmoneyTable() {
         updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("moneyTable") + "(Name varchar(32), Money int, Bank int)");
-    }
-
-    /**
-     * Setze den inventoryStatsTable auf
-     */
-    private static void setupMySQLinventoryStatsTable() {
-        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("inventoryStatsTable") + "(sender_uuid varchar(255) NOT NULL, receiver_uuid varchar(255) NOT NULL");
     }
 
     /**

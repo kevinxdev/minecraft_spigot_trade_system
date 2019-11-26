@@ -24,9 +24,7 @@ public class MySQLConfig {
         mySQL.addDefault("KevTV.MySQL.password", "");
         mySQL.addDefault("KevTV.MySQL.database", "dbName");
 
-        mySQL.addDefault("KevTV.MySQL.tables.requestUserTable", "request");
         mySQL.addDefault("KevTV.MySQL.tables.moneyTable", "money");
-        mySQL.addDefault("KevTV.MySQL.tables.inventoryStatsTable", "inventory_stats");
 
         mySQL.options().copyDefaults(true);
         try {

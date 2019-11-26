@@ -1,5 +1,6 @@
 package de.kevtv.kevin.minecraft_spigot_trade_system;
 
+import de.kevtv.kevin.minecraft_spigot_trade_system.commands.TradeAcceptCommand;
 import de.kevtv.kevin.minecraft_spigot_trade_system.commands.TradeCommand;
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.MySQLConfig;
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
@@ -76,6 +77,25 @@ public final class Main extends JavaPlugin {
         if(TextConfig.getTextConfig().getString("trade-player-does-not-exist") == null) {
             TextConfig.getTextConfig().set("trade-player-does-not-exist", "$cDer Spieler %s existiert nicht!");
         }
+        if(TextConfig.getTextConfig().getString("trade-send-request") == null) {
+            TextConfig.getTextConfig().set("trade-send-request", "Die Handelsanfrage wurde an %s gesendet!");
+        }
+
+        if(TextConfig.getTextConfig().getString("tradeAccept-no-player") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-no-player", "§cDu bist kein Spieler!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-no-permissions") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-no-permissions", "§cDu hast keine Berechtigung diesen Command zu nutzen!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-wrong-arguments") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-wrong-arguments", "§cDer Command heißt /tradeaccept <Spielername>!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-player-is-not-online") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-player-is-not-online", "§cDer Spieler %s ist nicht online!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-player-does-not-exist") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-player-does-not-exist", "$cDer Spieler %s existiert nicht!");
+        }
 
         TextConfig.save();
 
@@ -87,6 +107,7 @@ public final class Main extends JavaPlugin {
      */
     private void registerCommands() {
         Objects.requireNonNull(getCommand("trade")).setExecutor(new TradeCommand());
+        Objects.requireNonNull(getCommand("tradeaccept")).setExecutor(new TradeAcceptCommand());
     }
 
 }
