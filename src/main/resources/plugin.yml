@@ -1,0 +1,7 @@
+name: TradeSystem
+version: ${project.version}
+main: de.kevtv.kevin.minecraft_spigot_trade_system.Main
+api-version: 1.13
+authors: [KevTVKevin]
+description: Ein TradeSystem für Minecraft Spigot
+website: https://KevTV.de
