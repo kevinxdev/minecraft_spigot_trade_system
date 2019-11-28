@@ -15,6 +15,17 @@ public class TradeAcceptListener {
         tradeRequests.put(sender_uuid, receiver_uuid);
     }
 
-
+    /**
+     * Überprüft ob ein passendes paar in der HashMap existiert
+     * @param sender_uuid
+     * @param receiver_uuid
+     * @return
+     */
+    public static boolean isTradeRequest(String sender_uuid, String receiver_uuid) {
+        if(tradeRequests.containsKey(sender_uuid) && tradeRequests.containsValue(receiver_uuid)) {
+            return true;
+        }
+        return false;
+    }
 
 }

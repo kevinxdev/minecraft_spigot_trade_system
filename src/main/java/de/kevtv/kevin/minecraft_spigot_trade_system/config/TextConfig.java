@@ -25,17 +25,10 @@ public class TextConfig {
      * Erstelle die Konfigurationsdatei für die TextConfig
      */
     public static void createTextConfig() {
-        textConfigFile = new File(Main.getPlugin().getDataFolder(), "text.yml");
-        if(!textConfigFile.exists()) {
-            textConfigFile.getParentFile().mkdir();
-            Main.getPlugin().saveResource("text.yml", false);
-        }
-        textConfig = new YamlConfiguration();
-        try {
-            textConfig.load(textConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+        textConfigFile = new File("plugins//" + Main.getPlugin().getDescription().getName(), "text.yml");
+        textConfig = YamlConfiguration.loadConfiguration(textConfigFile);
+        textConfig.options().copyDefaults(true);
+        save();
     }
 
     /**

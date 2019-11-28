@@ -75,10 +75,13 @@ public final class Main extends JavaPlugin {
             TextConfig.getTextConfig().set("trade-player-is-not-online", "§cDer Spieler %s ist nicht online!");
         }
         if(TextConfig.getTextConfig().getString("trade-player-does-not-exist") == null) {
-            TextConfig.getTextConfig().set("trade-player-does-not-exist", "$cDer Spieler %s existiert nicht!");
+            TextConfig.getTextConfig().set("trade-player-does-not-exist", "§cDer Spieler %s existiert nicht!");
         }
         if(TextConfig.getTextConfig().getString("trade-send-request") == null) {
-            TextConfig.getTextConfig().set("trade-send-request", "Die Handelsanfrage wurde an %s gesendet!");
+            TextConfig.getTextConfig().set("trade-send-request", "Die Tradeanfrage wurde an %s gesendet!");
+        }
+        if(TextConfig.getTextConfig().getString("trade-new-trade-request") == null) {
+            TextConfig.getTextConfig().set("trade-new-trade-request", "Du hast eine Tradeanfrage von %s!");
         }
 
         if(TextConfig.getTextConfig().getString("tradeAccept-no-player") == null) {
@@ -94,7 +97,16 @@ public final class Main extends JavaPlugin {
             TextConfig.getTextConfig().set("tradeAccept-player-is-not-online", "§cDer Spieler %s ist nicht online!");
         }
         if(TextConfig.getTextConfig().getString("tradeAccept-player-does-not-exist") == null) {
-            TextConfig.getTextConfig().set("tradeAccept-player-does-not-exist", "$cDer Spieler %s existiert nicht!");
+            TextConfig.getTextConfig().set("tradeAccept-player-does-not-exist", "§cDer Spieler %s existiert nicht!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-trade-successfull") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-trade-successfull", "Der Trade mit %s kann losgehen!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-trade-not-successfull") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-trade-not-successfull", "§cDu hast keine Tradeanfrage von %s!");
+        }
+        if(TextConfig.getTextConfig().getString("trade-trade-accepted") == null) {
+            TextConfig.getTextConfig().set("trade-trade-accepted", "Der Trade mit %s kann losgehen!");
         }
 
         TextConfig.save();

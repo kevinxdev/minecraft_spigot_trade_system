@@ -34,7 +34,7 @@ public class MySQL {
      * Setze den moneyTable auf
      */
     private static void setupMySQLmoneyTable() {
-        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("moneyTable") + "(Name varchar(32), Money int, Bank int)");
+        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("tables.moneyTable") + "(Name varchar(32), Money int, Bank int)");
     }
 
     /**

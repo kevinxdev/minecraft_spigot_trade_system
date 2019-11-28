@@ -30,6 +30,7 @@ public class TradeCommand implements CommandExecutor {
                     if(checkPlayer != null && checkPlayer.isOnline()) {
                         TradeAcceptListener.addTradeRequest(player.getUniqueId().toString(), checkPlayer.getUniqueId().toString());
                         sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-send-request")), checkPlayer.getName()));
+                        checkPlayer.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-new-trade-request")), player.getName()));
                     } else {
                         if(checkPlayer != null) {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-player-is-not-online")), checkPlayer.getName()));
