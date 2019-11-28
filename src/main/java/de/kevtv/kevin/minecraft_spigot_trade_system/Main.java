@@ -83,6 +83,12 @@ public final class Main extends JavaPlugin {
         if(TextConfig.getTextConfig().getString("trade-new-trade-request") == null) {
             TextConfig.getTextConfig().set("trade-new-trade-request", "Du hast eine Tradeanfrage von %s!");
         }
+        if(TextConfig.getTextConfig().getString("trade-request-sended-earlier") == null) {
+            TextConfig.getTextConfig().set("trade-request-sended-earlier", "Du hast bereits eine Tradeanfrage an %s gesendet!");
+        }
+        if(TextConfig.getTextConfig().getString("trade-no-own-request") == null) {
+            TextConfig.getTextConfig().set("trade-no-own-request", "§cDu kannst dir selber keine Tradeanfrage senden!");
+        }
 
         if(TextConfig.getTextConfig().getString("tradeAccept-no-player") == null) {
             TextConfig.getTextConfig().set("tradeAccept-no-player", "§cDu bist kein Spieler!");

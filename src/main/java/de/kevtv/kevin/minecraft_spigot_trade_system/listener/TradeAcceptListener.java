@@ -28,4 +28,15 @@ public class TradeAcceptListener {
         return false;
     }
 
+    /**
+     * Entferne die tradeRequest aus der HashMap tradeRequests
+     * @param sender_uuid
+     * @param receiver_uuid
+     */
+    public static void removeTradeRequest(String sender_uuid, String receiver_uuid) {
+        if(tradeRequests.containsKey(sender_uuid) && tradeRequests.containsValue(receiver_uuid)) {
+            tradeRequests.remove(sender_uuid, receiver_uuid);
+        }
+    }
+
 }

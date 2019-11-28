@@ -31,6 +31,7 @@ public class TradeAcceptCommand implements CommandExecutor {
                         if(TradeAcceptListener.isTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString())) {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-successfull")), checkPlayer.getName()));
                             checkPlayer.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-trade-accepted")), player.getName()));
+                            TradeAcceptListener.removeTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString());
                         } else {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-not-successfull")), checkPlayer.getName()));
                         }
