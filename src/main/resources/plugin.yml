@@ -11,6 +11,8 @@ commands:
     description: /trade <Spielername>
   tradeAccept:
     description: /tradeaccept <Spielername>
+  tradeDeny:
+    description: /tradedeny <Spielername>
 
 permissions:
   trade.*:
@@ -18,7 +20,10 @@ permissions:
     children:
       trade.trade: true
       trade.accept: true
+      trade.deny: true
   trade.trade:
     default: notop
   trade.accept:
+    default: notop
+  trade.deny:
     default: notop

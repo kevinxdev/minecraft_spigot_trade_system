@@ -54,4 +54,35 @@ public class TradeAcceptCommand implements CommandExecutor {
 
         return true;
     }
+
+    /**
+     * Registiere Antworten vom TradeAccept Command
+     */
+    public static void registerTexts() {
+        if(TextConfig.getTextConfig().getString("tradeAccept-no-player") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-no-player", "§cDu bist kein Spieler!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-no-permissions") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-no-permissions", "§cDu hast keine Berechtigung diesen Command zu nutzen!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-wrong-arguments") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-wrong-arguments", "§cDer Command heißt /tradeaccept <Spielername>!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-player-is-not-online") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-player-is-not-online", "§cDer Spieler %s ist nicht online!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-player-does-not-exist") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-player-does-not-exist", "§cDer Spieler %s existiert nicht!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-trade-successfull") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-trade-successfull", "Der Trade mit %s kann losgehen!");
+        }
+        if(TextConfig.getTextConfig().getString("tradeAccept-trade-not-successfull") == null) {
+            TextConfig.getTextConfig().set("tradeAccept-trade-not-successfull", "§cDu hast keine Tradeanfrage von %s!");
+        }
+        if(TextConfig.getTextConfig().getString("trade-trade-accepted") == null) {
+            TextConfig.getTextConfig().set("trade-trade-accepted", "Der Trade mit %s kann losgehen!");
+        }
+    }
+
 }
