@@ -13,6 +13,7 @@ public class MoneyPlus {
     private ItemStack moneyPlus;
     private ItemMeta moneyPlusMeta;
     private MoneyAmount moneyAmount;
+    private int slot;
 
     public MoneyPlus(MoneyAmount moneyAmount) {
         setMoneyAmount(moneyAmount);
@@ -75,4 +76,11 @@ public class MoneyPlus {
         moneyPlus.setItemMeta(moneyPlusMeta);
     }
 
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
 }

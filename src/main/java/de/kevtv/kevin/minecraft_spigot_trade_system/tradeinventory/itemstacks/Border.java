@@ -9,6 +9,7 @@ public class Border {
 
     private static ItemStack border;
     private static ItemMeta borderMeta;
+    private static int slot;
 
     public static void setBorder() {
         border = new ItemStack(Material.BLUE_STAINED_GLASS_PANE);
@@ -31,4 +32,11 @@ public class Border {
         border.setItemMeta(borderMeta);
     }
 
+    public static int getSlot() {
+        return slot;
+    }
+
+    public static void setSlot(int slot) {
+        Border.slot = slot;
+    }
 }

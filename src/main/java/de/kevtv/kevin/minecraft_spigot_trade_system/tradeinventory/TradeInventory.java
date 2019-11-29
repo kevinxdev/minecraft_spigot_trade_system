@@ -9,14 +9,17 @@ import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.itemstacks.Mo
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
 public class TradeInventory {
 
     private static Inventory inventory;
+    public static ArrayList<MoneyAmount> moneyAmounts = new ArrayList<>();
+    public static ArrayList<MoneyMinus> moneyMinuses = new ArrayList<>();
+    public static ArrayList<MoneyPlus> moneyPluses = new ArrayList<>();
 
     public static void createInventory(Player player) {
         inventory = Bukkit.createInventory(null, 54, Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeInventory-inventory-name")));
@@ -39,17 +42,35 @@ public class TradeInventory {
         MoneyAmount moneyAmount1 = new MoneyAmount(player);
         MoneyAmount moneyAmount2 = new MoneyAmount(player2);
 
+        moneyAmount1.setSlot(46);
+        moneyAmount2.setSlot(52);
+
+        moneyAmounts.add(moneyAmount1);
+        moneyAmounts.add(moneyAmount2);
+
         inventory.setItem(46, moneyAmount1.getMoneyAmount());
         inventory.setItem(52, moneyAmount2.getMoneyAmount());
 
         MoneyMinus moneyMinus1 = new MoneyMinus(moneyAmount1);
         MoneyMinus moneyMinus2 = new MoneyMinus(moneyAmount2);
 
+        moneyMinus1.setSlot(45);
+        moneyMinus2.setSlot(51);
+
+        moneyMinuses.add(moneyMinus1);
+        moneyMinuses.add(moneyMinus2);
+
         inventory.setItem(45, moneyMinus1.getMoneyMinus());
         inventory.setItem(51, moneyMinus2.getMoneyMinus());
 
         MoneyPlus moneyPlus1 = new MoneyPlus(moneyAmount1);
         MoneyPlus moneyPlus2 = new MoneyPlus(moneyAmount2);
+
+        moneyPlus1.setSlot(47);
+        moneyPlus2.setSlot(53);
+
+        moneyPluses.add(moneyPlus1);
+        moneyPluses.add(moneyPlus2);
 
         inventory.setItem(47, moneyPlus1.getMoneyPlus());
         inventory.setItem(53, moneyPlus2.getMoneyPlus());

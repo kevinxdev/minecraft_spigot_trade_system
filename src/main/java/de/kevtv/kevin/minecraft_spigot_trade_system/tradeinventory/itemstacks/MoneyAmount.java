@@ -15,6 +15,7 @@ public class MoneyAmount {
     private ItemMeta moneyAmountMeta;
     private Player player;
     private int money;
+    private int slot;
 
     public MoneyAmount(Player player) {
         setPlayer(player);
@@ -69,4 +70,11 @@ public class MoneyAmount {
         moneyAmount.setItemMeta(moneyAmountMeta);
     }
 
+    public int getSlot() {
+        return slot;
+    }
+
+    public void setSlot(int slot) {
+        this.slot = slot;
+    }
 }
