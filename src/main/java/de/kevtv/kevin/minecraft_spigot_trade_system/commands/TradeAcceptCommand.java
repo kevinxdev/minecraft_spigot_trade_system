@@ -2,6 +2,7 @@ package de.kevtv.kevin.minecraft_spigot_trade_system.commands;
 
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.TradeAcceptListener;
+import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.TradeInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,7 +32,9 @@ public class TradeAcceptCommand implements CommandExecutor {
                         if(TradeAcceptListener.isTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString())) {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-successfull")), checkPlayer.getName()));
                             checkPlayer.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-trade-accepted")), player.getName()));
-                            TradeAcceptListener.removeTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString());
+                            TradeInventory.createInventory(checkPlayer);
+                            TradeInventory.openInventory(player);
+                            TradeInventory.openInventory(checkPlayer);
                         } else {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-not-successfull")), checkPlayer.getName()));
                         }

@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class TradeAcceptListener implements Listener {
 
-    private static HashMap<String, String> tradeRequests = new HashMap<>();
+    public static HashMap<String, String> tradeRequests = new HashMap<>();
 
     /**
      * Füge neue Tradeanfrage der tradeRequest HashMap hinzu
