@@ -82,6 +82,7 @@ public final class Main extends JavaPlugin {
     private void registerCommands() {
         Objects.requireNonNull(getCommand("trade")).setExecutor(new TradeCommand());
         Objects.requireNonNull(getCommand("tradeaccept")).setExecutor(new TradeAcceptCommand());
+        Objects.requireNonNull(getCommand("tradedeny")).setExecutor(new TradeDenyCommand());
     }
 
     /**

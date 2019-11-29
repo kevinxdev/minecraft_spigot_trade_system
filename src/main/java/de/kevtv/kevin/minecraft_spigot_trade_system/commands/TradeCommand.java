@@ -29,10 +29,12 @@ public class TradeCommand implements CommandExecutor {
                     Player checkPlayer = Bukkit.getPlayer(args[0]);
                     if(!args[0].equals(player.getName())) {
                         if (checkPlayer != null && checkPlayer.isOnline()) {
-                            if (!TradeAcceptListener.isTradeRequest(player.getUniqueId().toString(), checkPlayer.getUniqueId().toString())) {
+                            if (!TradeAcceptListener.isTradeRequest(player.getUniqueId().toString(), checkPlayer.getUniqueId().toString()) && !TradeAcceptListener.isTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString())) {
                                 TradeAcceptListener.addTradeRequest(player.getUniqueId().toString(), checkPlayer.getUniqueId().toString());
                                 sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-send-request")), checkPlayer.getName()));
                                 checkPlayer.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-new-trade-request")), player.getName()));
+                            } else if(TradeAcceptListener.isTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString())) {
+                                sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-you-have-already-a-request")), checkPlayer.getName()));
                             } else {
                                 sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-request-sended-earlier")), checkPlayer.getName()));
                             }
@@ -88,6 +90,9 @@ public class TradeCommand implements CommandExecutor {
         }
         if(TextConfig.getTextConfig().getString("trade-no-own-request") == null) {
             TextConfig.getTextConfig().set("trade-no-own-request", "§cDu kannst dir selber keine Tradeanfrage senden!");
+        }
+        if(TextConfig.getTextConfig().getString("trade-you-have-already-a-request") == null) {
+            TextConfig.getTextConfig().set("trade-you-have-already-a-request", "§c%s hat dir bereits eine Tradeanfrage gesendet!");
         }
     }
 
