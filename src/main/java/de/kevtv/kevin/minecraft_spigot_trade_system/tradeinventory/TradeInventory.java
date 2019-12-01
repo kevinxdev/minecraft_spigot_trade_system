@@ -39,17 +39,11 @@ public class TradeInventory {
 
         Player player2 = Bukkit.getPlayer(UUID.fromString(TradeAcceptListener.tradeRequests.get(player.getUniqueId().toString())));
 
-        MoneyAmount moneyAmount1 = new MoneyAmount(player);
-        MoneyAmount moneyAmount2 = new MoneyAmount(player2);
-
-        moneyAmount1.setSlot(46);
-        moneyAmount2.setSlot(52);
+        MoneyAmount moneyAmount1 = new MoneyAmount(player, 46);
+        MoneyAmount moneyAmount2 = new MoneyAmount(player2, 52);
 
         moneyAmounts.add(moneyAmount1);
         moneyAmounts.add(moneyAmount2);
-
-        inventory.setItem(46, moneyAmount1.getMoneyAmount());
-        inventory.setItem(52, moneyAmount2.getMoneyAmount());
 
         MoneyMinus moneyMinus1 = new MoneyMinus(moneyAmount1);
         MoneyMinus moneyMinus2 = new MoneyMinus(moneyAmount2);
@@ -86,6 +80,24 @@ public class TradeInventory {
         player.openInventory(TradeInventory.getInventory());
     }
 
+    public static void clearArrays(Player player) {
+        for(int i = 0; i < moneyAmounts.size(); i++) {
+            if(moneyAmounts.get(i).getPlayer() == player) {
+                moneyAmounts.remove(moneyAmounts.get(i));
+            }
+        }
+        for(int i = 0; i < moneyMinuses.size(); i++) {
+            if(moneyMinuses.get(i).getPlayer() == player) {
+                moneyMinuses.remove(moneyMinuses.get(i));
+            }
+        }
+        for(int i = 0; i < moneyPluses.size(); i++) {
+            if(moneyPluses.get(i).getPlayer() == player) {
+                moneyPluses.remove(moneyPluses.get(i));
+            }
+        }
+    }
+
     public static void registerTexts() {
         if(TextConfig.getTextConfig().getString("tradeInventory-inventory-name") == null) {
             TextConfig.getTextConfig().set("tradeInventory-inventory-name", "Trade Inventar");
@@ -101,6 +113,9 @@ public class TradeInventory {
         }
         if(TextConfig.getTextConfig().getString("tradeInventory-moneyPlus-name") == null) {
             TextConfig.getTextConfig().set("tradeInventory-moneyPlus-name", "Plus 100 Geos");
+        }
+        if(TextConfig.getTextConfig().getString("tradeInventory-anvilInventory-name") == null) {
+            TextConfig.getTextConfig().set("tradeInventory-anvilInventory-name", "Geos angeben:");
         }
     }
 }

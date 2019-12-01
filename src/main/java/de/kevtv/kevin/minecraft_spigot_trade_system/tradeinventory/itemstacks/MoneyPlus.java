@@ -23,6 +23,10 @@ public class MoneyPlus {
         setMoneyPlusDisplayName();
     }
 
+    public int getPlayerMoneyAmount() {
+        return moneyAmount.getPlayerMoneyAmount();
+    }
+
     public void setMoneyAmount(MoneyAmount moneyAmount) {
         this.moneyAmount = moneyAmount;
     }

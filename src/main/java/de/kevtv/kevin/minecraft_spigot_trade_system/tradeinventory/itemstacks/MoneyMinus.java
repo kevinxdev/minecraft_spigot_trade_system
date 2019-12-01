@@ -1,8 +1,10 @@
 package de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.itemstacks;
 
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
+import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.TradeInventory;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

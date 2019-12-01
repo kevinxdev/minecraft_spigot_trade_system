@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ArtifactManager">
-    <artifact type="jar" name="TradeSystem:jar">
+    <artifact type="jar" build-on-make="true" name="TradeSystem:jar">
       <output-path>$USER_HOME$/Desktop/1.14.4 server/plugins</output-path>
       <root id="archive" name="TradeSystem.jar">
         <element id="module-output" name="TradeSystem" />
@@ -175,6 +175,17 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="Maven: com.github.WesJD.AnvilGUI:anvilgui:7dbcfc2cdb">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: com.google.code.gson:gson:2.8.0">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar!/" />
@@ -221,13 +232,13 @@
     </library>
     <library name="Maven: org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-20191122.094057-84.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-20191122.094057-84-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-20191122.094057-84-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.4-R0.1-SNAPSHOT/spigot-api-1.14.4-R0.1-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.yaml:snakeyaml:1.23">

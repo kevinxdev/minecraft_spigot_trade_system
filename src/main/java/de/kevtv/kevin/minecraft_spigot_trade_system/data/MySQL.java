@@ -1,11 +1,9 @@
 package de.kevtv.kevin.minecraft_spigot_trade_system.data;
 
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.MySQLConfig;
+import org.bukkit.entity.Player;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class MySQL {
 
@@ -35,6 +33,28 @@ public class MySQL {
      */
     private static void setupMySQLmoneyTable() {
         updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("tables.moneyTable") + "(Name varchar(32), Money int, Bank int)");
+    }
+
+    public static int getMoneyOfPlayer(Player player) {
+        String playerName = player.getName();
+        int money = 0;
+        String query = "SELECT Money FROM " + MySQLConfig.getMySQLData("tables.moneyTable") + " WHERE Name = '" + playerName + "'";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                money = resultSet.getInt("Money");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            disconnectMySQL();
+            connectToMySQL();
+        }
+
+        return money;
+
     }
 
     /**
