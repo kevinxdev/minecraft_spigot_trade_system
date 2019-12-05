@@ -9,6 +9,7 @@ import de.kevtv.kevin.minecraft_spigot_trade_system.data.MySQL;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.InventoryListener;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.TradeAcceptListener;
 import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.TradeInventory;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
