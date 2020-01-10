@@ -1,7 +1,7 @@
 package de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory;
 
 import de.kevtv.kevin.minecraft_spigot_trade_system.Main;
-import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
+import de.kevtv.kevin.minecraft_spigot_trade_system.commands.TradeAcceptCommand;
 import de.kevtv.kevin.minecraft_spigot_trade_system.helper.HashMapHelper;
 import de.kevtv.kevin.minecraft_spigot_trade_system.helper.IsInteger;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.InventoryListener;
@@ -50,10 +50,15 @@ public class AnvilInput {
                     InventoryListener.anvilInputs.remove(InventoryListener.anvilInput.get(player1));
                     InventoryListener.anvilInput.remove(player1);
                     if(!closing) {
-                        System.out.println("CloseANVIL");
                         InventoryListener.closeInventorys(player1);
                     } else {
-                        TradeInventory.openInventory(player1);
+                        Player tradeInvPlayer;
+                        if (TradeAcceptCommand.tradeInventoryHashMap.get(player) != null) {
+                            tradeInvPlayer = player;
+                        } else {
+                            tradeInvPlayer = Bukkit.getPlayer(UUID.fromString(Objects.requireNonNull(HashMapHelper.getKey(TradeAcceptListener.tradeRequests, player.getUniqueId().toString()))));
+                        }
+                        TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).openInventory(player1);
                     }
                 })
                 .onComplete((player1, text) -> {
