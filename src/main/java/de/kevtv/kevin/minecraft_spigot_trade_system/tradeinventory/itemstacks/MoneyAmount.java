@@ -1,8 +1,11 @@
 package de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.itemstacks;
 
+import de.kevtv.kevin.minecraft_spigot_trade_system.commands.TradeAcceptCommand;
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
 import de.kevtv.kevin.minecraft_spigot_trade_system.data.MySQL;
-import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.TradeInventory;
+import de.kevtv.kevin.minecraft_spigot_trade_system.helper.HashMapHelper;
+import de.kevtv.kevin.minecraft_spigot_trade_system.listener.TradeAcceptListener;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -10,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class MoneyAmount {
 
@@ -26,7 +30,13 @@ public class MoneyAmount {
         setPlayerMoneyAmount();
         setMoneyAmount();
         setMoneyAmountMeta();
-        setSlot(TradeInventory.getInventory(), slot);
+        Player tradeInvPlayer;
+        if (TradeAcceptCommand.tradeInventoryHashMap.get(player) != null) {
+            tradeInvPlayer = player;
+        } else {
+            tradeInvPlayer = Bukkit.getPlayer(UUID.fromString(Objects.requireNonNull(HashMapHelper.getKey(TradeAcceptListener.tradeRequests, player.getUniqueId().toString()))));
+        }
+        setSlot(TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).getInventory(), slot);
         setMoney(0);
     }
 
