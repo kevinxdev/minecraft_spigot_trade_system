@@ -9,17 +9,21 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class TradeAcceptCommand implements CommandExecutor {
 
+    public static HashMap<Player, TradeInventory> tradeInventoryHashMap = new HashMap<>();
+
     /**
      * Funktion für "tradeaccept" Command
-     * @param sender
-     * @param command
-     * @param label
-     * @param args
-     * @return
+     *
+     * @param sender  - sender of command
+     * @param command - command
+     * @param label   - label
+     * @param args    - input of command
+     * @return - boolean return
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -32,9 +36,10 @@ public class TradeAcceptCommand implements CommandExecutor {
                         if(TradeAcceptListener.isTradeRequest(checkPlayer.getUniqueId().toString(), player.getUniqueId().toString())) {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-successfull")), checkPlayer.getName()));
                             checkPlayer.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("trade-trade-accepted")), player.getName()));
-                            TradeInventory.createInventory(checkPlayer);
-                            TradeInventory.openInventory(player);
-                            TradeInventory.openInventory(checkPlayer);
+                            tradeInventoryHashMap.put(checkPlayer, new TradeInventory());
+                            tradeInventoryHashMap.get(checkPlayer).createInventory(checkPlayer);
+                            tradeInventoryHashMap.get(checkPlayer).openInventory(player);
+                            tradeInventoryHashMap.get(checkPlayer).openInventory(checkPlayer);
                         } else {
                             sender.sendMessage(String.format(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeAccept-trade-not-successfull")), checkPlayer.getName()));
                         }
