@@ -33,7 +33,11 @@
             <goals>
               <goal>shade</goal>
             </goals>
-            <configuration />
+            <configuration>
+              <outputDirectory>C:\Users\kevin\Documents\GigaClub.net\Minecraft\TradeSystem 1.14.4 Minecraft
+                Testserver\plugins
+              </outputDirectory>
+            </configuration>
           </execution>
         </executions>
       </plugin>
