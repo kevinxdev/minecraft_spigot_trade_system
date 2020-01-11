@@ -3,6 +3,7 @@ package de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.itemstacks;
 import de.kevtv.kevin.minecraft_spigot_trade_system.Main;
 import de.kevtv.kevin.minecraft_spigot_trade_system.commands.TradeAcceptCommand;
 import de.kevtv.kevin.minecraft_spigot_trade_system.config.TextConfig;
+import de.kevtv.kevin.minecraft_spigot_trade_system.data.MySQL;
 import de.kevtv.kevin.minecraft_spigot_trade_system.helper.HashMapHelper;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.InventoryListener;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.TradeAcceptListener;
@@ -174,6 +175,24 @@ public class ReadyTimer {
     }
 
     private void closeInventorys() {
+        for (ItemStack item : TradeInventory.items.get(ready1.getPlayer())) {
+            ready2.getPlayer().getInventory().addItem(item);
+        }
+        for (ItemStack item : TradeInventory.items.get(ready2.getPlayer())) {
+            ready1.getPlayer().getInventory().addItem(item);
+        }
+        for (int i = 0; i < TradeInventory.moneyAmounts.size(); i++) {
+            if (TradeInventory.moneyAmounts.get(i).getPlayer() == ready1.getPlayer()) {
+                MySQL.addMoneyOfPlayer(ready2.getPlayer(), TradeInventory.moneyAmounts.get(i).getMoney());
+                MySQL.remMoneyOfPlayer(ready1.getPlayer(), TradeInventory.moneyAmounts.get(i).getMoney());
+            }
+        }
+        for (int i = 0; i < TradeInventory.moneyAmounts.size(); i++) {
+            if (TradeInventory.moneyAmounts.get(i).getPlayer() == ready2.getPlayer()) {
+                MySQL.addMoneyOfPlayer(ready1.getPlayer(), TradeInventory.moneyAmounts.get(i).getMoney());
+                MySQL.remMoneyOfPlayer(ready2.getPlayer(), TradeInventory.moneyAmounts.get(i).getMoney());
+            }
+        }
         InventoryListener.finished = true;
         ready1.getPlayer().closeInventory();
         ready2.getPlayer().closeInventory();
