@@ -40,6 +40,12 @@ public class InventoryListener implements Listener {
             gettedPlayer = Bukkit.getPlayer(gettedUUID);
             assert gettedPlayer != null;
             TradeAcceptListener.removeTradeRequest(uuid, TradeAcceptListener.tradeRequests.get(uuid));
+            for (ItemStack item : TradeInventory.items.get(gettedPlayer)) {
+                gettedPlayer.getInventory().addItem(item);
+            }
+            for (ItemStack item : TradeInventory.items.get(player)) {
+                player.getInventory().addItem(item);
+            }
             gettedPlayer.closeInventory();
 
         } else if (TradeAcceptListener.tradeRequests.containsValue(uuid)) {
@@ -51,6 +57,12 @@ public class InventoryListener implements Listener {
             gettedPlayer = Bukkit.getPlayer(gettedUUID);
             assert gettedPlayer != null;
             TradeAcceptListener.removeTradeRequest(gettedUUIDString, uuid);
+            for (ItemStack item : TradeInventory.items.get(gettedPlayer)) {
+                gettedPlayer.getInventory().addItem(item);
+            }
+            for (ItemStack item : TradeInventory.items.get(player)) {
+                player.getInventory().addItem(item);
+            }
             gettedPlayer.closeInventory();
 
         }
@@ -90,77 +102,89 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
-        if(event.getCurrentItem() != null) {
-            if (TradeAcceptCommand.tradeInventoryHashMap.get(player) != null) {
-                tradeInvPlayer = player;
-            } else {
-                tradeInvPlayer = Bukkit.getPlayer(UUID.fromString(Objects.requireNonNull(HashMapHelper.getKey(TradeAcceptListener.tradeRequests, player.getUniqueId().toString()))));
-            }
-            if (TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).getInventory().getViewers().contains(player)) {
-                if (Objects.equals(Objects.requireNonNull(Objects.requireNonNull(event.getCurrentItem()).getItemMeta()).getDisplayName(), Border.getBorderMeta().getDisplayName())) {
-                    event.setCancelled(true);
+        try {
+            Player player = (Player) event.getWhoClicked();
+            if (event.getCurrentItem() != null) {
+                if (TradeAcceptCommand.tradeInventoryHashMap.get(player) != null) {
+                    tradeInvPlayer = player;
                 } else {
-                    for (int i = 0; i < TradeInventory.moneyAmounts.size(); i++) {
-                        if (TradeInventory.moneyAmounts.get(i).getMoneyAmountMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && TradeInventory.moneyAmounts.get(i).getPlayer() == player && event.getSlot() == TradeInventory.moneyAmounts.get(i).getSlot()) {
-                            anvilInput.put(player, new AnvilInput());
-                            anvilInput.get(player).createInventory(player);
-                            anvilInputs.add(anvilInput.get(player));
-                        }
-                    }
-                    for (MoneyMinus moneyMinus : TradeInventory.moneyMinuses) {
-                        if (moneyMinus.getMoneyMinusMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && moneyMinus.getPlayer() == player && event.getSlot() == moneyMinus.getSlot()) {
-                            if (moneyMinus.getMoney() - 100 >= 0) {
-                                moneyMinus.remMoney(100);
+                    tradeInvPlayer = Bukkit.getPlayer(UUID.fromString(Objects.requireNonNull(HashMapHelper.getKey(TradeAcceptListener.tradeRequests, player.getUniqueId().toString()))));
+                }
+                if (TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).getInventory().getViewers().contains(player)) {
+                    if (Objects.equals(Objects.requireNonNull(Objects.requireNonNull(event.getCurrentItem()).getItemMeta()).getDisplayName(), Border.getBorderMeta().getDisplayName())) {
+                        event.setCancelled(true);
+                    } else {
+                        for (int i = 0; i < TradeInventory.moneyAmounts.size(); i++) {
+                            if (TradeInventory.moneyAmounts.get(i).getMoneyAmountMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && TradeInventory.moneyAmounts.get(i).getPlayer() == player && event.getSlot() == TradeInventory.moneyAmounts.get(i).getSlot()) {
+                                anvilInput.put(player, new AnvilInput());
+                                anvilInput.get(player).createInventory(player);
+                                anvilInputs.add(anvilInput.get(player));
                             }
                         }
-                    }
-                    for (MoneyPlus moneyPlus : TradeInventory.moneyPluses) {
-                        if (moneyPlus.getMoneyPlusMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && moneyPlus.getPlayer() == player && event.getSlot() == moneyPlus.getSlot()) {
-                            if (moneyPlus.getMoney() + 100 <= moneyPlus.getPlayerMoneyAmount()) {
-                                moneyPlus.addMoney(100);
-                            } else {
-                                moneyPlus.addMoney(moneyPlus.getPlayerMoneyAmount() - moneyPlus.getMoney());
-                            }
-                        }
-                    }
-                    for (Ready ready : TradeInventory.readies) {
-                        if (ready.getItemMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && ready.getPlayer() == player && event.getSlot() == ready.getSlot()) {
-                            if (ready.getState() == 0) {
-                                ready.setReadyState();
-                            } else if (ready.getState() == 1) {
-                                ready.setNotReadyState();
-                            } else if (ready.getState() == 2) {
-                                ready.setNotReadyState();
-                            }
-                            for (ReadyTimer readyTimer : TradeInventory.readyTimers) {
-                                if (readyTimer.getPlayer1() == player || readyTimer.getPlayer2() == player) {
-                                    readyTimer.checkState();
+                        for (MoneyMinus moneyMinus : TradeInventory.moneyMinuses) {
+                            if (moneyMinus.getMoneyMinusMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && moneyMinus.getPlayer() == player && event.getSlot() == moneyMinus.getSlot()) {
+                                if (moneyMinus.getMoney() - 100 >= 0) {
+                                    moneyMinus.remMoney(100);
                                 }
                             }
                         }
-                    }
-                    if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.PLAYER) {
-                        if (TradeInventory.items.size() < 16) {
-                            ItemStack item = event.getCurrentItem();
-                            ItemMeta itemMeta = item.getItemMeta();
-                            assert itemMeta != null;
-                            itemMeta.setLocalizedName(String.valueOf(event.getSlot()));
-                            item.setItemMeta(itemMeta);
-                            TradeInventory.items.get(player).add(item);
-                            TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
-                            player.getInventory().setItem(event.getSlot(), new ItemStack(Material.AIR));
+                        for (MoneyPlus moneyPlus : TradeInventory.moneyPluses) {
+                            if (moneyPlus.getMoneyPlusMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && moneyPlus.getPlayer() == player && event.getSlot() == moneyPlus.getSlot()) {
+                                if (moneyPlus.getMoney() + 100 <= moneyPlus.getPlayerMoneyAmount()) {
+                                    moneyPlus.addMoney(100);
+                                } else {
+                                    moneyPlus.addMoney(moneyPlus.getPlayerMoneyAmount() - moneyPlus.getMoney());
+                                }
+                            }
                         }
+                        for (Ready ready : TradeInventory.readies) {
+                            if (ready.getItemMeta().getDisplayName().equals(Objects.requireNonNull(event.getCurrentItem().getItemMeta()).getDisplayName()) && ready.getPlayer() == player && event.getSlot() == ready.getSlot()) {
+                                if (ready.getState() == 0) {
+                                    ready.setReadyState();
+                                } else if (ready.getState() == 1) {
+                                    ready.setNotReadyState();
+                                } else if (ready.getState() == 2) {
+                                    ready.setNotReadyState();
+                                }
+                                for (ReadyTimer readyTimer : TradeInventory.readyTimers) {
+                                    if (readyTimer.getPlayer1() == player || readyTimer.getPlayer2() == player) {
+                                        readyTimer.checkState();
+                                    }
+                                }
+                            }
+                        }
+                        if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.PLAYER) {
+                            if (TradeInventory.items.get(player).size() < 16) {
+                                ItemStack item = event.getCurrentItem();
+                                ItemMeta itemMeta = item.getItemMeta();
+                                assert itemMeta != null;
+                                itemMeta.setLocalizedName(String.valueOf(event.getSlot()));
+                                item.setItemMeta(itemMeta);
+                                TradeInventory.items.get(player).add(item);
+                                TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
+                                player.getInventory().setItem(event.getSlot(), new ItemStack(Material.AIR));
+                            } else {
+                                player.sendMessage("Zu viel");
+                            }
+                        }
+                        if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.CHEST) {
+                            if (TradeInventory.p1al.contains(event.getSlot()) || TradeInventory.p2al.contains(event.getSlot())) {
+                                if (TradeInventory.items.get(player).contains(event.getCurrentItem())) {
+                                    ItemStack item = event.getCurrentItem();
+                                    TradeInventory.items.get(player).remove(event.getCurrentItem());
+                                    TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
+                                    player.getInventory().addItem(item);
+                                } else {
+                                    player.sendMessage("Das ist nicht dein Item");
+                                }
+                            }
+                        }
+                        event.setCancelled(true);
                     }
-                    if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.CHEST) {
-                        player.getInventory().addItem(event.getCurrentItem());
-                        int value = TradeInventory.items.get(player).indexOf(event.getCurrentItem());
-                        TradeInventory.items.get(player).set(value, new ItemStack(Material.AIR));
-                        TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
-                    }
-                    event.setCancelled(true);
                 }
             }
+        } catch (NullPointerException e) {
+            System.out.println("null");
         }
     }
 
