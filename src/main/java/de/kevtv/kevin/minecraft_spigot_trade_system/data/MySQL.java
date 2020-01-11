@@ -57,9 +57,24 @@ public class MySQL {
 
     }
 
+    public static void addMoneyOfPlayer(Player player, int amountToAdd) {
+        String playerName = player.getName();
+        int amountToSet = getMoneyOfPlayer(player) + amountToAdd;
+        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET Money = " + amountToSet + " WHERE Name = '" + playerName + "'";
+        updateMySQL(query);
+    }
+
+    public static void remMoneyOfPlayer(Player player, int amountToRem) {
+        String playerName = player.getName();
+        int amountToSet = getMoneyOfPlayer(player) - amountToRem;
+        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET Money = " + amountToSet + " WHERE Name = '" + playerName + "'";
+        updateMySQL(query);
+    }
+
     /**
      * Funktion zur Ausführung von MySQL Commands
-     * @param query
+     *
+     * @param query - query statement
      */
     private static void updateMySQL(String query) {
         try {
