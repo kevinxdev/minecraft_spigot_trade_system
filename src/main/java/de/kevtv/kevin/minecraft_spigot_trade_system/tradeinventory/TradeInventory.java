@@ -25,7 +25,11 @@ public class TradeInventory {
     public static ArrayList<ReadyTimer> readyTimers = new ArrayList<>();
     public static HashMap<Player, ArrayList<ItemStack>> items = new HashMap<>();
     private Inventory inventory;
-    private HashMap<Integer, ItemStack> slot = new HashMap<>();
+
+    public static ArrayList<Integer> p1al = new ArrayList<>();
+    public static ArrayList<Integer> p2al = new ArrayList<>();
+    int[] p1 = {0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 27, 28, 29, 30};
+    int[] p2 = {5, 6, 7, 8, 14, 15, 16, 17, 23, 24, 25, 26, 32, 33, 34, 35};
 
     public static void clearArrays(Player player) {
         for (int i = 0; i < moneyAmounts.size(); i++) {
@@ -169,6 +173,12 @@ public class TradeInventory {
 
         inventory.setItem(readyTimer.getSlot(), readyTimer.getItemStack());
 
+        for (int i : p1) {
+            p1al.add(i);
+        }
+        for (int i : p2) {
+            p2al.add(i);
+        }
 
     }
 
@@ -181,33 +191,28 @@ public class TradeInventory {
     }
 
     public void setItemsToInv() {
+        for (int item : p1) {
+            inventory.setItem(item, new ItemStack(Material.AIR));
+        }
+        for (int item : p2) {
+            inventory.setItem(item, new ItemStack(Material.AIR));
+        }
         items.forEach((key, value) -> {
-            int[] p1 = {0, 1, 2, 3, 9, 10, 11, 12, 18, 19, 20, 21, 27, 28, 29, 30};
-            int[] p2 = {5, 6, 7, 8, 14, 15, 16, 17, 23, 24, 25, 26, 32, 33, 34, 35};
             int j = 0;
             int k = 0;
             for (ItemStack itemStack : value) {
                 if (players1.contains(key)) {
-                    slot.put(p1[j], itemStack);
-                    inventory.setItem(p1[j], itemStack);
-                    j++;
+                    if (j < 16) {
+                        inventory.setItem(p1[j], itemStack);
+                        j++;
+                    }
                 } else if (players2.contains(key)) {
-                    slot.put(p2[k], itemStack);
-                    inventory.setItem(p2[k], itemStack);
-                    k++;
+                    if (k < 16) {
+                        inventory.setItem(p2[k], itemStack);
+                        k++;
+                    }
                 }
             }
         });
-    }
-
-    private Inventory moveup(int[] array, int index) {
-        int newIndex = index++;
-        if (index < array.length) {
-            inventory.setItem(index, inventory.getItem(newIndex));
-            inventory.setItem(newIndex, new ItemStack(Material.AIR));
-            return moveup(array, newIndex);
-        } else {
-            return inventory;
-        }
     }
 }
