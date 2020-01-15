@@ -32,19 +32,19 @@ public class MySQL {
      * Setze den moneyTable auf
      */
     private static void setupMySQLmoneyTable() {
-        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("tables.moneyTable") + "(Name varchar(32), Money int, Bank int)");
+        updateMySQL("CREATE TABLE IF NOT EXISTS " + MySQLConfig.getMySQLData("tables.moneyTable") + "(Name varchar(32), " + MySQLConfig.getMySQLData("tables.moneyCol") + " int, Bank int)");
     }
 
     public static int getMoneyOfPlayer(Player player) {
         String playerName = player.getName();
         int money = 0;
-        String query = "SELECT Money FROM " + MySQLConfig.getMySQLData("tables.moneyTable") + " WHERE Name = '" + playerName + "'";
+        String query = "SELECT " + MySQLConfig.getMySQLData("tables.moneyCol") + " FROM " + MySQLConfig.getMySQLData("tables.moneyTable") + " WHERE Name = '" + playerName + "'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                money = resultSet.getInt("Money");
+                money = resultSet.getInt(MySQLConfig.getMySQLData("tables.moneyCol"));
             }
 
         } catch (SQLException e) {
@@ -60,14 +60,14 @@ public class MySQL {
     public static void addMoneyOfPlayer(Player player, int amountToAdd) {
         String playerName = player.getName();
         int amountToSet = getMoneyOfPlayer(player) + amountToAdd;
-        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET Money = " + amountToSet + " WHERE Name = '" + playerName + "'";
+        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET " + MySQLConfig.getMySQLData("tables.moneyCol") + " = " + amountToSet + " WHERE Name = '" + playerName + "'";
         updateMySQL(query);
     }
 
     public static void remMoneyOfPlayer(Player player, int amountToRem) {
         String playerName = player.getName();
         int amountToSet = getMoneyOfPlayer(player) - amountToRem;
-        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET Money = " + amountToSet + " WHERE Name = '" + playerName + "'";
+        String query = "UPDATE " + MySQLConfig.getMySQLData("tables.moneyTable") + " SET " + MySQLConfig.getMySQLData("tables.moneyCol") + " = " + amountToSet + " WHERE Name = '" + playerName + "'";
         updateMySQL(query);
     }
 
