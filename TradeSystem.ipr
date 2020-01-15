@@ -177,15 +177,15 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="Maven: com.github.WesJD.AnvilGUI:anvilgui:7dbcfc2cdb">
+    <library name="Maven: com.github.WesJD.AnvilGUI:anvilgui:478e0c196e">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/478e0c196e/anvilgui-478e0c196e.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/478e0c196e/anvilgui-478e0c196e-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/7dbcfc2cdb/anvilgui-7dbcfc2cdb-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/com/github/WesJD/AnvilGUI/anvilgui/478e0c196e/anvilgui-478e0c196e-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: com.google.code.gson:gson:2.8.0">

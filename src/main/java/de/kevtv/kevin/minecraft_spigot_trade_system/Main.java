@@ -9,7 +9,6 @@ import de.kevtv.kevin.minecraft_spigot_trade_system.data.MySQL;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.InventoryListener;
 import de.kevtv.kevin.minecraft_spigot_trade_system.listener.TradeAcceptListener;
 import de.kevtv.kevin.minecraft_spigot_trade_system.tradeinventory.TradeInventory;
-import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -48,19 +47,21 @@ public final class Main extends JavaPlugin {
     }
 
     /**
-     * Setze Instanz der Main Klasse
-     * @param plugin
+     * Getter für die Main Instanz
+     *
+     * @return return plugin
      */
-    private static void setPlugin(Main plugin) {
-        Main.plugin = plugin;
+    public static Main getPlugin() {
+        return plugin;
     }
 
     /**
-     * Getter für die Main Instanz
-     * @return
+     * Setze Instanz der Main Klasse
+     *
+     * @param plugin set plugin
      */
-    public static Main getPlugin() {
-         return plugin;
+    private static void setPlugin(Main plugin) {
+        Main.plugin = plugin;
     }
 
     /**
