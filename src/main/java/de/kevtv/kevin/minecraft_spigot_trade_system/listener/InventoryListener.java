@@ -100,6 +100,21 @@ public class InventoryListener implements Listener {
 
     }
 
+    public static void registerTexts() {
+        if (TextConfig.getTextConfig().getString("inventoryListener-closed-inventory") == null) {
+            TextConfig.getTextConfig().set("inventoryListener-closed-inventory", "§cDein Tradepartner %s hat das Trade Inventar geschlossen und damit den Tausch beendet!");
+        }
+        if (TextConfig.getTextConfig().getString("inventoryListener-you-closed-inventory") == null) {
+            TextConfig.getTextConfig().set("inventoryListener-you-closed-inventory", "§cDu hast dein Trade Inventar geschlossen und damit den Tausch mit %s beendet!");
+        }
+        if (TextConfig.getTextConfig().getString("inventoryListener-to-much") == null) {
+            TextConfig.getTextConfig().set("inventoryListener-to-much", "§cZu viel!");
+        }
+        if (TextConfig.getTextConfig().getString("inventoryListener-that-is-not-your-item") == null) {
+            TextConfig.getTextConfig().set("inventoryListener-that-is-not-your-item", "§cDas ist nicht dein Item!");
+        }
+    }
+
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         try {
@@ -164,7 +179,7 @@ public class InventoryListener implements Listener {
                                 TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
                                 player.getInventory().setItem(event.getSlot(), new ItemStack(Material.AIR));
                             } else {
-                                player.sendMessage("Zu viel");
+                                player.sendMessage(Objects.requireNonNull(TextConfig.getTextConfig().getString("inventoryListener-to-much")));
                             }
                         }
                         if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.CHEST) {
@@ -175,7 +190,7 @@ public class InventoryListener implements Listener {
                                     TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
                                     player.getInventory().addItem(item);
                                 } else {
-                                    player.sendMessage("Das ist nicht dein Item");
+                                    player.sendMessage(Objects.requireNonNull(TextConfig.getTextConfig().getString("inventoryListener-that-is-not-your-item")));
                                 }
                             }
                         }
@@ -185,15 +200,6 @@ public class InventoryListener implements Listener {
             }
         } catch (NullPointerException e) {
             System.out.println("null");
-        }
-    }
-
-    public static void registerTexts() {
-        if(TextConfig.getTextConfig().getString("inventoryListener-closed-inventory") == null) {
-            TextConfig.getTextConfig().set("inventoryListener-closed-inventory", "§cDein Tradepartner %s hat das Trade Inventar geschlossen und damit den Tausch beendet!");
-        }
-        if(TextConfig.getTextConfig().getString("inventoryListener-you-closed-inventory") == null) {
-            TextConfig.getTextConfig().set("inventoryListener-you-closed-inventory", "§cDu hast dein Trade Inventar geschlossen und damit den Tausch mit %s beendet!");
         }
     }
 }
