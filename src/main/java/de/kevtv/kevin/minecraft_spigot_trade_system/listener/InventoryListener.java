@@ -81,14 +81,12 @@ public class InventoryListener implements Listener {
         if (!finished) {
             if (!anvilInput.containsKey(player)) {
                 if (event.getView().getTitle().equals(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeInventory-inventory-name")))) {
-                    System.out.println("CloseINVFALSE1");
                     closeInventorys(player);
                 }
             } else {
                 for (int i = 0; i < anvilInputs.size(); i++) {
                     if (!anvilInputs.get(i).inMode && anvilInputs.get(i).getPlayer() == player) {
                         if (event.getView().getTitle().equals(Objects.requireNonNull(TextConfig.getTextConfig().getString("tradeInventory-inventory-name")))) {
-                            System.out.println("CloseINVFALSE2");
                             anvilInputs.remove(anvilInputs.get(i));
                             i--;
                             closeInventorys(player);
@@ -186,6 +184,10 @@ public class InventoryListener implements Listener {
                             if (TradeInventory.p1al.contains(event.getSlot()) || TradeInventory.p2al.contains(event.getSlot())) {
                                 if (TradeInventory.items.get(player).contains(event.getCurrentItem())) {
                                     ItemStack item = event.getCurrentItem();
+                                    ItemMeta itemMeta = item.getItemMeta();
+                                    assert itemMeta != null;
+                                    itemMeta.setLocalizedName("");
+                                    item.setItemMeta(itemMeta);
                                     TradeInventory.items.get(player).remove(event.getCurrentItem());
                                     TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
                                     player.getInventory().addItem(item);
@@ -199,7 +201,7 @@ public class InventoryListener implements Listener {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("null");
+            System.out.print("");
         }
     }
 }
