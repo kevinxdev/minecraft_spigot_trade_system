@@ -25,6 +25,7 @@ public class MySQLConfig {
         mySQL.addDefault("KevTV.MySQL.database", "dbName");
 
         mySQL.addDefault("KevTV.MySQL.tables.moneyTable", "money");
+        mySQL.addDefault("KevTV.MySQL.tables.moneyCol", "money");
 
         mySQL.options().copyDefaults(true);
         try {
@@ -36,8 +37,9 @@ public class MySQLConfig {
 
     /**
      * Funktion zum holen von Daten aus der Datenbank Config
-     * @param data
-     * @return
+     *
+     * @param data data of config file
+     * @return data from database
      */
     public static String getMySQLData(String data) {
         String correctData = "";
