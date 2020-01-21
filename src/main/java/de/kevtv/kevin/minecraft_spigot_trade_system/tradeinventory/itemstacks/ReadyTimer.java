@@ -176,18 +176,18 @@ public class ReadyTimer {
 
     private void closeInventorys() {
         for (ItemStack item : TradeInventory.items.get(ready1.getPlayer())) {
+            ready2.getPlayer().getInventory().addItem(item);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setLocalizedName("");
             item.setItemMeta(itemMeta);
-            ready2.getPlayer().getInventory().addItem(item);
         }
         for (ItemStack item : TradeInventory.items.get(ready2.getPlayer())) {
+            ready1.getPlayer().getInventory().addItem(item);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setLocalizedName("");
             item.setItemMeta(itemMeta);
-            ready1.getPlayer().getInventory().addItem(item);
         }
         for (int i = 0; i < TradeInventory.moneyAmounts.size(); i++) {
             if (TradeInventory.moneyAmounts.get(i).getPlayer() == ready1.getPlayer()) {

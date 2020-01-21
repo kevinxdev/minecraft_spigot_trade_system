@@ -42,9 +42,17 @@ public class InventoryListener implements Listener {
             TradeAcceptListener.removeTradeRequest(uuid, TradeAcceptListener.tradeRequests.get(uuid));
             for (ItemStack item : TradeInventory.items.get(gettedPlayer)) {
                 gettedPlayer.getInventory().addItem(item);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setLocalizedName("");
+                item.setItemMeta(itemMeta);
             }
             for (ItemStack item : TradeInventory.items.get(player)) {
                 player.getInventory().addItem(item);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setLocalizedName("");
+                item.setItemMeta(itemMeta);
             }
             gettedPlayer.closeInventory();
 
@@ -59,9 +67,17 @@ public class InventoryListener implements Listener {
             TradeAcceptListener.removeTradeRequest(gettedUUIDString, uuid);
             for (ItemStack item : TradeInventory.items.get(gettedPlayer)) {
                 gettedPlayer.getInventory().addItem(item);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setLocalizedName("");
+                item.setItemMeta(itemMeta);
             }
             for (ItemStack item : TradeInventory.items.get(player)) {
                 player.getInventory().addItem(item);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setLocalizedName("");
+                item.setItemMeta(itemMeta);
             }
             gettedPlayer.closeInventory();
 
@@ -183,14 +199,14 @@ public class InventoryListener implements Listener {
                         if (Objects.requireNonNull(event.getClickedInventory()).getType() == InventoryType.CHEST) {
                             if (TradeInventory.p1al.contains(event.getSlot()) || TradeInventory.p2al.contains(event.getSlot())) {
                                 if (TradeInventory.items.get(player).contains(event.getCurrentItem())) {
+                                    TradeInventory.items.get(player).remove(event.getCurrentItem());
                                     ItemStack item = event.getCurrentItem();
+                                    player.getInventory().addItem(item);
                                     ItemMeta itemMeta = item.getItemMeta();
                                     assert itemMeta != null;
                                     itemMeta.setLocalizedName("");
                                     item.setItemMeta(itemMeta);
-                                    TradeInventory.items.get(player).remove(event.getCurrentItem());
                                     TradeAcceptCommand.tradeInventoryHashMap.get(tradeInvPlayer).setItemsToInv();
-                                    player.getInventory().addItem(item);
                                 } else {
                                     player.sendMessage(Objects.requireNonNull(TextConfig.getTextConfig().getString("inventoryListener-that-is-not-your-item")));
                                 }
